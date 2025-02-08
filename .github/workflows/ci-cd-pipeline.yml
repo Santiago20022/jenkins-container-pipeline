@@ -18,13 +18,23 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Asegúrate de que esta versión sea compatible con tu proyecto
+          node-version: '16'
 
       - name: Install dependencies
-        run: npm install      # Instala las dependencias
+        run: npm install
 
       - name: Run tests
-        run: npm test         # Ejecuta los tests
+        run: npm test
 
       - name: Build project
-        run: npm run build    # Compila el proyecto (si es necesario)
+        run: npm run build
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to GitHub Pages
+        run: echo "Deploying to GitHub Pages..."
